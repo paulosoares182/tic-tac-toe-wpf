@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="TicTacToe.Views.GameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TicTacToe.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 0 | ColSpan 2 | TOP -->
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="0">
+            <Label>Partidas Disputadas:</Label>
+            <Label Content="{Binding Path=Bll.Game.CountMatches, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label>Empates:</Label>
+            <Label Content="{Binding Path=Bll.Game.CountDraw, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label>Vez de:</Label>
+            <Label Content="{Binding Path=Bll.CurrentPlayer.Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></Label>
+        </DockPanel>
+        
+        <!-- Row 1 | Col 1 | BOARD -->
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="Board" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
+            <DockPanel LastChildFill="False" Margin="0,0,0 10">
+                <Button x:Name="Field_0" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,0" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_0, Path=Tag}">
+                    <Image Source="{Binding Path=Board[0]}"/>
+                </Button>
+                <Button x:Name="Field_1" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,1" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_1, Path=Tag}">
+                    <Image Source="{Binding Path=Board[1]}"/>
+                </Button>
+                <Button x:Name="Field_2" Width="100" Height="100" Tag="0,2" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_2, Path=Tag}">
+                    <Image Source="{Binding Path=Board[2]}"/>
+                </Button>
+            </DockPanel>
+            <DockPanel LastChildFill="False" Margin="0,0,0 10">
+                <Button x:Name="Field_3" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,0" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_3, Path=Tag}">
+                    <Image Source="{Binding Path=Board[3]}"/>
+                </Button>
+                <Button x:Name="Field_4" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,1" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_4, Path=Tag}">
+                    <Image Source="{Binding Path=Board[4]}"/>
+                </Button>
+                <Button x:Name="Field_5" Width="100" Height="100" Tag="1,2" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_5, Path=Tag}">
+                    <Image Source="{Binding Path=Board[5]}"/>
+                </Button>
+            </DockPanel>
+            <DockPanel LastChildFill="False">
+                <Button x:Name="Field_6" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,0" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_6, Path=Tag}">
+                    <Image Source="{Binding Path=Board[6]}"/>
+                </Button>
+                <Button x:Name="Field_7" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,1" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_7, Path=Tag}">
+                    <Image Source="{Binding Path=Board[7]}"/>
+                </Button>
+                <Button x:Name="Field_8" Width="100" Height="100" Tag="2,2" BorderThickness="0" Background="WhiteSmoke"
+                        Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_8, Path=Tag}">
+                    <Image Source="{Binding Path=Board[8]}"/>
+                </Button>
+            </DockPanel>
+        </StackPanel>
+
+        <!-- Row 1 | Col 0 | PLAYER 1 -->
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+            <Label Content="{Binding Path=Bll.Game.Players[0].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Content="{Binding Path=Bll.Game.Players[0].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                   FontSize="50"></Label>
+        </StackPanel>
+
+        <!-- Row 1 | Col 2 | PLAYER 2 -->
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+            <Label Content="{Binding Path=Bll.Game.Players[1].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Content="{Binding Path=Bll.Game.Players[1].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                   FontSize="50"></Label>
+        </StackPanel>
+        <!-- Row 2 | LOG -->
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="3">
+            <GroupBox Header="Log">
+                <TextBlock Margin="10, 0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</TextBlock>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</UserControl>
