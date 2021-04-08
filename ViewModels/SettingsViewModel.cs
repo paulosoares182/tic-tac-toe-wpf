@@ -37,6 +37,8 @@ namespace TicTacToe.ViewsModels
         {
             try
             {
+                SoundHelper.PlayClick();
+
                 UserControl gameUI = new GameView(Difficulty, Player1Nickname, Player2Nickname);
                 MainWindowHelper.AddContent(gameUI);
             }
