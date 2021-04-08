@@ -1,59 +1,78 @@
 ﻿using System.IO;
 using System.Media;
+using System.Threading.Tasks;
 
 namespace TicTacToe.Helpers
 {
     public static class SoundHelper
     {
         private static bool _soundOn = true;
+        private static SoundPlayer _player = new();
 
         public static void On() => _soundOn = true;
         public static void Off() => _soundOn = false;
 
-        public static void PlayClick()
+        public static async void PlayClick()
         {
-            if(!_soundOn) return;
-
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "click.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "click.wav");
+                _player.ExecutePlay();
+            });
         }
 
-        public static void PlayWins()
+        public static async void PlayWins()
         {
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "wins.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "wins.wav");
+                _player.ExecutePlay();
+            });
         }
 
-        public static void PlayDraw()
+        public static async void PlayDraw()
         {
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "draw.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "draw.wav");
+                _player.ExecutePlay();
+            });
         }
 
-        public static void PlaySelect1()
+        public static async void PlaySelect1()
         {
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "select_1.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "select_1.wav");
+                _player.ExecutePlay();
+            });
         }
 
-        public static void PlaySelect2()
+        public static async void PlaySelect2()
         {
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "select_2.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "select_2.wav");
+                _player.ExecutePlay();
+            });
         }
 
-        public static void PlaySelect3()
+        public static async void PlaySelect3()
         {
-            SoundPlayer player = new(Path.Combine(DirectoryHelper.AssetsPath, "select_3.wav"));
-            player.ExecutePlay();
+            await Task.Run(() =>
+            {
+                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "select_3.wav");
+                _player.ExecutePlay();
+            });
         }
 
         private static void ExecutePlay(this SoundPlayer player)
         {
             if (!_soundOn) return;
 
-            player.Load();
-            player.Play();
+            player.Stop();
+            player.LoadAsync();
+            player.PlaySync();
         }
     }
 }

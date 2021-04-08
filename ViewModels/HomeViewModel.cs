@@ -16,6 +16,8 @@ namespace TicTacToe.ViewsModels
 
         private void Next(object parameter)
         {
+            SoundHelper.PlayClick();
+
             MainWindowHelper.AddContent(new SettingsView());
         }
 
