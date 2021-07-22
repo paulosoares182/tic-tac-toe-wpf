@@ -1,4 +1,6 @@
-﻿using TicTacToe.Helpers;
+﻿using System.Windows.Media;
+
+using TicTacToe.Helpers;
 using TicTacToe.Views;
 using TicTacToe.ViewsModels.Commands;
 
@@ -22,9 +24,15 @@ namespace TicTacToe.ViewsModels
                 darkMode = value;
 
                 ThemeHelper.ModifyTheme(value);
+
+                TopForegroundColor = value ? Brushes.WhiteSmoke : Brushes.Black;
+
                 NotifyPropertyChanged(nameof(DarkMode));
+                NotifyPropertyChanged(nameof(TopForegroundColor));
             }
         }
+
+        public SolidColorBrush TopForegroundColor { get; private set; }
 
         public MainWindowViewModel()
         {

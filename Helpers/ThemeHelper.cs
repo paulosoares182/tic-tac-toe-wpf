@@ -12,40 +12,29 @@ namespace TicTacToe.Helpers
             var paletteHelper = new PaletteHelper();
             var theme = paletteHelper.GetTheme();
 
-            theme.SetBaseTheme(isDarkTheme ? Theme.Dark : Theme.Light);
-
-            //if (isDarkTheme)
-            //{
-            //    theme.SetBaseTheme(Theme.Dark);
-            //    paletteHelper.ChangePrimaryColor(Color.FromRgb(100, 0, 0));
-            //}
-            //else
-            //{
-            //    theme.SetBaseTheme(Theme.Light);
-            //    paletteHelper.ChangePrimaryColor(Color.FromRgb(0, 0, 100));
-            //}
-
-            paletteHelper.SetTheme(theme);
+            if (isDarkTheme)
+            {
+                theme.SetBaseTheme(Theme.Dark);
+                paletteHelper.ChangeThemeColors(Color.FromRgb(0, 255, 255), Color.FromRgb(0, 255, 255));
+            }
+            else
+            {
+                theme.SetBaseTheme(Theme.Light);
+                paletteHelper.ChangeThemeColors(Color.FromRgb(0, 255, 255), Color.FromRgb(0, 255, 255));
+            }
         }
 
-        public static void ChangePrimaryColor(this PaletteHelper paletteHelper, Color color)
+        private static void ChangeThemeColors(this PaletteHelper paletteHelper, Color primaryColor, Color secondaryColor)
         {
             ITheme theme = paletteHelper.GetTheme();
 
-            theme.PrimaryLight = new ColorPair(color.Lighten());
-            theme.PrimaryMid = new ColorPair(color);
-            theme.PrimaryDark = new ColorPair(color.Darken());
+            theme.PrimaryLight = new ColorPair(primaryColor.Lighten());
+            theme.PrimaryMid = new ColorPair(primaryColor);
+            theme.PrimaryDark = new ColorPair(primaryColor.Darken());
 
-            paletteHelper.SetTheme(theme);
-        }
-
-        public static void ChangeSecondaryColor(this PaletteHelper paletteHelper, Color color)
-        {
-            ITheme theme = paletteHelper.GetTheme();
-
-            theme.SecondaryLight = new ColorPair(color.Lighten());
-            theme.SecondaryMid = new ColorPair(color);
-            theme.SecondaryDark = new ColorPair(color.Darken());
+            theme.SecondaryLight = new ColorPair(secondaryColor.Lighten());
+            theme.SecondaryMid = new ColorPair(secondaryColor);
+            theme.SecondaryDark = new ColorPair(secondaryColor.Darken());
 
             paletteHelper.SetTheme(theme);
         }

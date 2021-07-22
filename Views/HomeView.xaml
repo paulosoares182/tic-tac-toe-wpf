@@ -9,15 +9,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center">Seja bem-vindo(a)!</Label>
-            <Label>Como jogar</Label>
+            <Label HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}">Seja bem-vindo(a)!</Label>
+            <Label Margin="0, 20, 0, 5" FontWeight="Bold" FontSize="15">Como jogar:</Label>
             <ListBox >
-                <ListBoxItem>1. Selecione com quem você deseja jogar (CPU ou outro jogador local)</ListBoxItem>
-                <ListBoxItem>2. Escolha a figura que deseja utilizar no jogo (X ou O)</ListBoxItem>
-                <ListBoxItem>3. Selecione a dificuldade se for jogar contra a CPU (Fácil, Normal, Difícil)</ListBoxItem>
+                <ListBoxItem IsEnabled="False">1. Selecione com quem você deseja jogar (CPU ou outro jogador local)</ListBoxItem>
+                <ListBoxItem IsEnabled="False">2. Escolha a figura que deseja utilizar no jogo (X ou O)</ListBoxItem>
+                <ListBoxItem IsEnabled="False">3. Selecione a dificuldade se for jogar contra a CPU (Fácil, Normal, Difícil)</ListBoxItem>
                 <ListBoxItem>4. Vence o jogo quem conseguir marcar três figuras na horizontal, vertical ou diagonal.</ListBoxItem>
             </ListBox>
-            <Button Command="{Binding GotItCommand}">Entendi!</Button>
+            <Button Command="{Binding GotItCommand}" Margin="0,20,0,0">Entendi!</Button>
         </StackPanel>
     </Grid>
 </UserControl>

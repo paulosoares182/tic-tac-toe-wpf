@@ -7,6 +7,7 @@ using TicTacToe.Business;
 using TicTacToe.Enums;
 using TicTacToe.Helpers;
 using TicTacToe.Models;
+using TicTacToe.Shared.Dialog;
 using TicTacToe.ViewsModels.Commands;
 
 namespace TicTacToe.ViewsModels
@@ -54,7 +55,7 @@ namespace TicTacToe.ViewsModels
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Erro ao iniciar partida", MessageBoxButton.OK, MessageBoxImage.Error);
+                Dialog.Error("Inicio de partida", e.Message);
                 throw;
             }
         }
@@ -94,12 +95,12 @@ namespace TicTacToe.ViewsModels
         private void ShowMessageWins()
         {
             SoundHelper.PlayWins();
-            MessageBox.Show($"{Bll.CurrentPlayer.Nickname} venceu!");
+            Dialog.Wins("Vitória!", $"Jogador {Bll.CurrentPlayer.Nickname} venceu a partida!");
         }
         private void ShowMessagDraw()
         {
             SoundHelper.PlayDraw();
-            MessageBox.Show("Deu empate!");
+            Dialog.Draw("Empate", "Xi... deu velha!");
         }
     }
 }

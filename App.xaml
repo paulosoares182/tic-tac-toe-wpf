@@ -7,7 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Inherit" PrimaryColor="Cyan" SecondaryColor="Lime"
+                <materialDesign:BundledTheme BaseTheme="Inherit" PrimaryColor="Cyan" SecondaryColor="DeepPurple"
                                              ColorAdjustment="{materialDesign:ColorAdjustment}" />
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
