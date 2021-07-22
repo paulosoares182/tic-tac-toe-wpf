@@ -23,11 +23,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="0, 0, 0 2" BorderBrush="#000">
-            <DockPanel Grid.Row="0" Background="White">
+        <Border BorderThickness="0, 0, 0 1" BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+            <DockPanel Grid.Row="0" Background="Transparent">
                 <DockPanel DockPanel.Dock="Left" VerticalAlignment="Center"  Margin="10, 0, 0, 0">
-                    <materialDesign:PackIcon Kind="Hashtag" Foreground="Black"/>
-                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}" Margin="5, 0, 0, 0" Foreground="Black"/>
+                    <materialDesign:PackIcon Kind="Hashtag" Foreground="{Binding TopForegroundColor, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}" Margin="5, 0, 0, 0" Foreground="{Binding TopForegroundColor, UpdateSourceTrigger=PropertyChanged}"/>
                 </DockPanel>
 
                 <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -44,15 +44,15 @@
                         </materialDesign:ToggleButtonAssist.OnContent>
                     </ToggleButton>
                     
-                    <Button Command="{Binding MinimizeCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="Black" BorderThickness="0">
+                    <Button Command="{Binding MinimizeCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="{Binding TopForegroundColor, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
                         <materialDesign:PackIcon Kind="WindowMinimize" Background="Transparent" Margin="5,0"/>
                     </Button>
 
-                    <Button Command="{Binding MaximizeCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="Black" BorderThickness="0">
+                    <Button Command="{Binding MaximizeCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="{Binding TopForegroundColor, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
                         <materialDesign:PackIcon Kind="WindowMaximize" Background="Transparent" Margin="5,0"/>
                     </Button>
 
-                    <Button Command="{Binding CloseCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="Black" BorderThickness="0">
+                    <Button Command="{Binding CloseCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="{Binding TopForegroundColor, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
                         <materialDesign:PackIcon Kind="WindowClose" Background="Transparent" Margin="5,0"/>
                     </Button>
                 </DockPanel>
