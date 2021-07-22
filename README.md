@@ -14,3 +14,9 @@ O que foi utilizado para desenvolver o projeto:
 - [C#](https://docs.microsoft.com/en-US/dotnet/csharp/)
 - [Visual Studio](https://visualstudio.microsoft.com/pt-br/vs/community/)
 - [Material Design](http://materialdesigninxaml.net/)
+
+## 📝 Features
+
+- [x] Modo "Multiplayer (local)"
+- [ ] Modo "vs CPU"
+- [ ] Níveis de Dificuldade
