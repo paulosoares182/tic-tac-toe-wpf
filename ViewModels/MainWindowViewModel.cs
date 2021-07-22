@@ -4,17 +4,35 @@ using TicTacToe.ViewsModels.Commands;
 
 namespace TicTacToe.ViewsModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
         public RelayCommand MinimizeCommand { get; private set; }
         public RelayCommand MaximizeCommand { get; private set; }
         public RelayCommand CloseCommand { get; private set; }
+
+        private bool darkMode;
+        public bool DarkMode
+        {
+            get
+            {
+                return darkMode;
+            }
+            set
+            {
+                darkMode = value;
+
+                ThemeHelper.ModifyTheme(value);
+                NotifyPropertyChanged(nameof(DarkMode));
+            }
+        }
 
         public MainWindowViewModel()
         {
             MinimizeCommand = new RelayCommand(Minimize, CanExecute);
             MaximizeCommand = new RelayCommand(Maximize, CanExecute);
             CloseCommand = new RelayCommand(Close, CanExecute);
+
+            DarkMode = false;
         }
 
         private void Minimize(object parameter)
