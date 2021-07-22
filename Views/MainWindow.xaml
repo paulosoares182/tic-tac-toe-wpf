@@ -31,6 +31,19 @@
                 </DockPanel>
 
                 <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                  ToolTip="Select Dark Mode"
+                                  IsChecked="{Binding DarkMode, UpdateSourceTrigger=PropertyChanged}">
+                        <materialDesign:PackIcon Kind="LightbulbOnOutline" RenderTransformOrigin=".5,.5">
+                            <materialDesign:PackIcon.RenderTransform>
+                                <RotateTransform Angle="45" />
+                            </materialDesign:PackIcon.RenderTransform>
+                        </materialDesign:PackIcon>
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="MoonWaxingCrescent" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                    
                     <Button Command="{Binding MinimizeCommand}" Margin="0" Padding="0" Background="Transparent" Foreground="Black" BorderThickness="0">
                         <materialDesign:PackIcon Kind="WindowMinimize" Background="Transparent" Margin="5,0"/>
                     </Button>

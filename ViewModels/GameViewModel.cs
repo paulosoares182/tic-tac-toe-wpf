@@ -1,6 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
+﻿using MaterialDesignThemes.Wpf;
+
+using System;
 using System.Windows;
 
 using TicTacToe.Business;
@@ -20,11 +20,11 @@ namespace TicTacToe.ViewsModels
         {
             get
             {
-                string[] value = new string[9];
+                PackIconKind[] value = new PackIconKind[9];
 
-                string x = Path.Combine(DirectoryHelper.AssetsPath, "x.png");
-                string circle = Path.Combine(DirectoryHelper.AssetsPath, "circle.png");
-                string empty = Path.Combine(DirectoryHelper.AssetsPath, "empty.png");
+                var circle = PackIconKind.CircleOutline;
+                var x = PackIconKind.CloseOutline;
+                var empty = PackIconKind.DragHorizontalVariant;
 
                 int index = 0;
                 foreach (var field in Bll.Game.Board)
@@ -64,9 +64,7 @@ namespace TicTacToe.ViewsModels
         {
             SetFieldCommand = new RelayCommand(SetField, CanSetField);
         }
-
         private bool CanSetField(object parameter) => !IsRunning;
-
         public void SetField(object parameter)
         {
             IsRunning = true;
@@ -98,7 +96,6 @@ namespace TicTacToe.ViewsModels
             SoundHelper.PlayWins();
             MessageBox.Show($"{Bll.CurrentPlayer.Nickname} venceu!");
         }
-
         private void ShowMessagDraw()
         {
             SoundHelper.PlayDraw();

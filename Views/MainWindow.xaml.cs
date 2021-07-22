@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using TicTacToe.Helpers;
+
 using TicTacToe.Views;
 using TicTacToe.ViewsModels;
 
@@ -14,12 +14,7 @@ namespace TicTacToe
         {
             InitializeComponent();
 
-            ThemeHelper.ModifyTheme(false);
-
-            SoundHelper.PlayClick();
-
             DataContext = new MainWindowViewModel();
-
             Main.Content = new HomeView();
         }
     }

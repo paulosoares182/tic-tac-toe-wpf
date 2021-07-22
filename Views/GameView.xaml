@@ -32,47 +32,47 @@
         </DockPanel>
         
         <!-- Row 1 | Col 1 | BOARD -->
-        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="Board" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="Board" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
             <DockPanel LastChildFill="False" Margin="0,0,0 10">
-                <Button x:Name="Field_0" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,0" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_0" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,0" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_0, Path=Tag}">
-                    <Image Source="{Binding Path=Board[0]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[0]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_1" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,1" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_1" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="0,1" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_1, Path=Tag}">
-                    <Image Source="{Binding Path=Board[1]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[1]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_2" Width="100" Height="100" Tag="0,2" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_2" Width="100" Height="100" Tag="0,2" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_2, Path=Tag}">
-                    <Image Source="{Binding Path=Board[2]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[2]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
             </DockPanel>
             <DockPanel LastChildFill="False" Margin="0,0,0 10">
-                <Button x:Name="Field_3" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,0" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_3" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,0" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_3, Path=Tag}">
-                    <Image Source="{Binding Path=Board[3]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[3]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_4" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,1" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_4" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="1,1" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_4, Path=Tag}">
-                    <Image Source="{Binding Path=Board[4]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[4]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_5" Width="100" Height="100" Tag="1,2" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_5" Width="100" Height="100" Tag="1,2" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_5, Path=Tag}">
-                    <Image Source="{Binding Path=Board[5]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[5]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
             </DockPanel>
             <DockPanel LastChildFill="False">
-                <Button x:Name="Field_6" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,0" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_6" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,0" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_6, Path=Tag}">
-                    <Image Source="{Binding Path=Board[6]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[6]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_7" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,1" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_7" Width="100" Height="100" Margin="0, 0, 10, 0" Tag="2,1" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_7, Path=Tag}">
-                    <Image Source="{Binding Path=Board[7]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[7]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
-                <Button x:Name="Field_8" Width="100" Height="100" Tag="2,2" BorderThickness="0" Background="WhiteSmoke"
+                <Button x:Name="Field_8" Width="100" Height="100" Tag="2,2" BorderThickness="1" BorderBrush="Cyan" Background="Transparent"
                         Command="{Binding SetFieldCommand}" CommandParameter="{Binding ElementName=Field_8, Path=Tag}">
-                    <Image Source="{Binding Path=Board[8]}"/>
+                    <materialDesign:PackIcon Kind="{Binding Path=Board[8]}" Foreground="Cyan" Height="50" Width="50"/>
                 </Button>
             </DockPanel>
         </StackPanel>
@@ -91,10 +91,10 @@
                    FontSize="50"></Label>
         </StackPanel>
         <!-- Row 2 | LOG -->
-        <DockPanel Grid.Row="2" Grid.ColumnSpan="3">
+        <!--<DockPanel Grid.Row="2" Grid.ColumnSpan="3">
             <GroupBox Header="Log">
                 <TextBlock Margin="10, 0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</TextBlock>
             </GroupBox>
-        </DockPanel>
+        </DockPanel>-->
     </Grid>
 </UserControl>
