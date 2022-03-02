@@ -18,5 +18,5 @@ O que foi utilizado para desenvolver o projeto:
 ## 📝 Features
 
 - [x] Modo "Multiplayer (local)"
-- [ ] Modo "vs CPU"
-- [ ] Níveis de Dificuldade
+- [x] Modo "vs CPU"
+- [x] Níveis de Dificuldade
