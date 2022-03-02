@@ -39,7 +39,7 @@ namespace TicTacToe.Helpers
             });
         }
 
-        public static async void PlaySelect1()
+        public static async void PlaySelect()
         {
             await Task.Run(() =>
             {
@@ -48,31 +48,14 @@ namespace TicTacToe.Helpers
             });
         }
 
-        public static async void PlaySelect2()
-        {
-            await Task.Run(() =>
-            {
-                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "select_2.wav");
-                _player.ExecutePlay();
-            });
-        }
-
-        public static async void PlaySelect3()
-        {
-            await Task.Run(() =>
-            {
-                _player.SoundLocation = Path.Combine(DirectoryHelper.AssetsPath, "select_3.wav");
-                _player.ExecutePlay();
-            });
-        }
-
         private static void ExecutePlay(this SoundPlayer player)
         {
-            if (!_soundOn) return;
-
-            player.Stop();
-            player.LoadAsync();
-            player.PlaySync();
+            if (_soundOn)
+            {
+                player.Stop();
+                player.LoadAsync();
+                player.PlaySync();
+            }
         }
     }
 }

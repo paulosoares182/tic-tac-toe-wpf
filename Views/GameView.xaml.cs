@@ -9,12 +9,12 @@ namespace TicTacToe.Views
     /// </summary>
     public partial class GameView : UserControl
     {
-        public GameView(EDifficulty difficulty, string player1Nickname, string player2Nickname)
+        public GameView(EDifficulty difficulty, string player1Nickname, string player2Nickname, bool isMultiplayer)
         {
             InitializeComponent();
             try
             {
-                DataContext = new GameViewModel(difficulty, player1Nickname, player2Nickname);
+                DataContext = new GameViewModel(difficulty, player1Nickname, player2Nickname, isMultiplayer);
             }
             catch
             {
