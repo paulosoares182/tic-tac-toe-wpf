@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Diagnostics;
 using System.Windows.Controls;
 
-using TicTacToe.Business;
 using TicTacToe.Enums;
 using TicTacToe.Helpers;
-using TicTacToe.Models;
 using TicTacToe.Views;
 using TicTacToe.ViewsModels.Commands;
 
@@ -20,15 +13,17 @@ namespace TicTacToe.ViewsModels
     {
         public RelayCommand StartCommand { get; private set; }
 
+        public bool IsMultiplayer { get; set; }
         public string Player1Nickname { get; set; }
         public string Player2Nickname { get; set; }
         public EDifficulty Difficulty { get; set; }
 
         public SettingsViewModel()
         {
+            IsMultiplayer = false;
             Difficulty = EDifficulty.NORMAL;
-            Player1Nickname = string.Empty;
-            Player2Nickname = string.Empty;
+            Player1Nickname = "Player 1";
+            Player2Nickname = "Player 2";
 
             StartCommand = new RelayCommand(StartGame, CanStart);
         }
@@ -39,18 +34,20 @@ namespace TicTacToe.ViewsModels
             {
                 SoundHelper.PlayClick();
 
-                UserControl gameUI = new GameView(Difficulty, Player1Nickname, Player2Nickname);
+                UserControl gameUI = new GameView(Difficulty, Player1Nickname, Player2Nickname, IsMultiplayer);
                 MainWindowHelper.AddContent(gameUI);
             }
-            catch
+            catch(Exception e)
             {
-                
+                Debug.WriteLine(e.Message);
             }
         }
 
         private bool CanStart(object parameter)
         {
-            return !(String.IsNullOrWhiteSpace(Player1Nickname) || String.IsNullOrWhiteSpace(Player2Nickname));
+            return IsMultiplayer
+                ? !(string.IsNullOrWhiteSpace(Player1Nickname) || string.IsNullOrWhiteSpace(Player2Nickname))
+                : !string.IsNullOrWhiteSpace(Player1Nickname);
         }
     }
 }

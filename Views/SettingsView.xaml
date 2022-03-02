@@ -4,21 +4,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TicTacToe.Views"
+             xmlns:local="clr-namespace:TicTacToe.Views" 
+             xmlns:viewsmodels="clr-namespace:TicTacToe.ViewsModels"
+             xmlns:converters="clr-namespace:TicTacToe.Converters"
+             d:DataContext="{d:DesignInstance Type=viewsmodels:SettingsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:BooleanConverter x:Key="InverseBoolRadioConverter" Inverse="True"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Margin="0, 0, 0, 20">
-                <TextBlock>Jogador 1</TextBlock>
-                <TextBox Text="{Binding Path=Player1Nickname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+            <DockPanel LastChildFill="False" Margin="0,0,0,20">
+                <RadioButton DockPanel.Dock="Left" GroupName="RbVersus" IsChecked="{Binding IsMultiplayer, Converter={StaticResource InverseBoolRadioConverter}}">CPU</RadioButton>
+                <RadioButton DockPanel.Dock="Right" GroupName="RbVersus" IsChecked="{Binding IsMultiplayer}">Multiplayer</RadioButton>
+            </DockPanel>
+            
+            <!--Multiplayer-->
+            <StackPanel>
+                <StackPanel Margin="0, 0, 0, 20">
+                    <TextBlock>Jogador 1</TextBlock>
+                    <TextBox Text="{Binding Path=Player1Nickname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Nickname"/>
+                </StackPanel>
+
+                <StackPanel Margin="0, 0, 0, 20">
+                    <TextBlock>Jogador 2</TextBlock>
+                    <TextBox Text="{Binding Path=Player2Nickname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="Nickname"/>
+                </StackPanel>
+
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMultiplayer}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
             </StackPanel>
 
-            <StackPanel Margin="0, 0, 0, 20">
-                <TextBlock>Jogador 2</TextBlock>
-                <TextBox Text="{Binding Path=Player2Nickname, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+            <!--CPU-->
+            <StackPanel>
+                <StackPanel Margin="0, 0, 0, 20">
+                    <TextBlock>Jogador</TextBlock>
+                    <TextBox Text="{Binding Path=Player1Nickname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Nickname"/>
+                </StackPanel>
+
+                <StackPanel Margin="0, 0, 0, 20">
+                    <TextBlock>Dificuldade</TextBlock>
+                    <ComboBox ItemsSource="{Binding Path=Difficulty, Converter={converters:EnumToCollectionConverter}, Mode=OneTime}"
+                              SelectedValuePath="Key" 
+                              DisplayMemberPath="Value" 
+                              SelectedValue="{Binding Path=Difficulty}"/>
+                </StackPanel>
+
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMultiplayer}" Value="False">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
             </StackPanel>
 
             <Button Width="200" Command="{Binding StartCommand}" Content="Começar"/>

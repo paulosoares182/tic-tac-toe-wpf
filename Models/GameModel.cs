@@ -2,10 +2,11 @@
 
 namespace TicTacToe.Models
 {
-    public class Game
+    public class GameModel
     {
         public EDifficulty Difficulty { get; private set; }
-        public Player[] Players { get; private set; }
+        public PlayerModel[] Players { get; private set; }
+        public bool IsMultiplayer { get; set; }
         public EPiece[,] Board { get; private set; }
         public int CountMatches { get; private set; }
         public int CountDraw
@@ -17,10 +18,11 @@ namespace TicTacToe.Models
             }
         }
 
-        public Game(EDifficulty difficulty, Player[] players)
+        public GameModel(EDifficulty difficulty, PlayerModel[] players, bool isMultiplayer)
         {
             Difficulty = difficulty;
             Players = players;
+            IsMultiplayer = isMultiplayer;
 
             InitBoard();
         }

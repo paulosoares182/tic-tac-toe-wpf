@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 using TicTacToe.Business;
@@ -8,15 +9,18 @@ using TicTacToe.Enums;
 using TicTacToe.Helpers;
 using TicTacToe.Models;
 using TicTacToe.Shared.Dialog;
+using TicTacToe.Views;
 using TicTacToe.ViewsModels.Commands;
 
 namespace TicTacToe.ViewsModels
 {
     public class GameViewModel : ViewModelBase
     {
-        private bool IsRunning = false;
-        public GameBLL Bll { get; set; }
+        private bool IsRunning;
+        public GameRules Controller { get; set; }
         public RelayCommand SetFieldCommand { get; private set; }
+        public RelayCommand StopCommand { get; private set; }
+
         public Array Board
         {
             get
@@ -28,7 +32,7 @@ namespace TicTacToe.ViewsModels
                 var empty = PackIconKind.DragHorizontalVariant;
 
                 int index = 0;
-                foreach (var field in Bll.Game.Board)
+                foreach (var field in Controller.Game.Board)
                 {
                     value[index] = field == EPiece.EMPTY ? empty : (field == EPiece.CIRCLE ? circle : x);
                     index++;
@@ -37,21 +41,21 @@ namespace TicTacToe.ViewsModels
                 return value;
             }
         }
-        
-        public GameViewModel(EDifficulty difficulty, string player1Nickname, string player2Nickname)
+
+        public GameViewModel(EDifficulty difficulty, string player1Nickname, string player2Nickname, bool isMultiplayer)
         {
             IninitalizeCommands();
 
-            var player1 = new Player(player1Nickname, EPiece.X, false);
-            var player2 = new Player(player2Nickname, EPiece.CIRCLE, false);
+            var player1 = new PlayerModel(player1Nickname, EPiece.X, false);
+            var player2 = new PlayerModel(player2Nickname, EPiece.CIRCLE, !isMultiplayer);
 
-            var game = new Game(difficulty, new Player[] { player1, player2 });
+            var game = new GameModel(difficulty, new PlayerModel[] { player1, player2 }, isMultiplayer);
 
-            Bll = new GameBLL(game);
+            Controller = new GameRules(game);
 
             try
             {
-                Bll.Start();
+                Controller.Start();
             }
             catch (Exception e)
             {
@@ -64,43 +68,74 @@ namespace TicTacToe.ViewsModels
         private void IninitalizeCommands()
         {
             SetFieldCommand = new RelayCommand(SetField, CanSetField);
+            StopCommand = new RelayCommand(Stop, CanSetField);
         }
         private bool CanSetField(object parameter) => !IsRunning;
         public void SetField(object parameter)
         {
+            int[] arrayPosition = Array.ConvertAll(parameter.ToString().Split(','), int.Parse);
+            Tuple<int, int> position = new(arrayPosition[0], arrayPosition[1]);
+
+            if (!Controller.CanSetField(position))
+                return;
+
             IsRunning = true;
-            
-            string[] tag = (parameter as string).Split(','); //number,number
 
-            int row = int.Parse(tag[0]);
-            int column = int.Parse(tag[1]);
+            SoundHelper.PlaySelect();
 
-            var result = Bll.SetFieldAsync(new int[2] { row, column }, ShowMessageWins, ShowMessagDraw);
-
-            SoundHelper.PlaySelect1();
-
-            //Liberar Board após setar campo, porém antes do método inteiro terminar
-            NotifyPropertyChanged(nameof(Board));
-
-            //Liberar Board após o método inteiro terminar
-            _ = result.ContinueWith(t =>
+            _ = Task.Run(async () =>
             {
-                IsRunning = false;
+                Controller.SetField(position, ShowMessageWins, ShowMessagDraw);
+
                 NotifyPropertyChanged(nameof(Board));
-                MainWindowHelper.FocusContent();
+
+                if (Controller.CurrentPlayer.IsCPU)
+                {
+                    await Task.Delay(800);
+
+                    SoundHelper.PlaySelect();
+                    Controller.CPUSetField(ShowMessageWins, ShowMessagDraw);
+                }
+
+                ReleaseBoard();
             });
+        }
+        public void Stop(object parameter)
+        {
+            MainWindowHelper.AddContent(new SettingsView());
         }
         #endregion
 
         private void ShowMessageWins()
         {
-            SoundHelper.PlayWins();
-            Dialog.Wins("Vitória!", $"Jogador {Bll.CurrentPlayer.Nickname} venceu a partida!");
+            ReleaseBoard();
+
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                SoundHelper.PlayWins();
+                Dialog.Wins("Vitória!", $"{Controller.CurrentPlayer.Nickname} venceu a partida!");
+            });
         }
         private void ShowMessagDraw()
         {
-            SoundHelper.PlayDraw();
-            Dialog.Draw("Empate", "Xi... deu velha!");
+            ReleaseBoard();
+
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                SoundHelper.PlayDraw();
+                Dialog.Draw("Empate", "Xi... deu velha!");
+            });
+        }
+        private void ReleaseBoard()
+        {
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                IsRunning = false;
+                NotifyPropertyChanged(nameof(Controller));
+                NotifyPropertyChanged(nameof(Board));
+            });
+
+            MainWindowHelper.FocusContent();
         }
     }
 }

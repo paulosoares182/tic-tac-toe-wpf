@@ -2,18 +2,18 @@
 
 namespace TicTacToe.Models
 {
-    public class Player
+    public class PlayerModel
     {
         public string Nickname { get; private set; }
         public EPiece Piece { get; private set; }
         public bool IsCPU { get; private set; }
         public int CountWins { get; private set; }
 
-        public Player(string nickname, EPiece piece, bool isCPU)
+        public PlayerModel(string nickname, EPiece piece, bool isCPU)
         {
-            Nickname = nickname;
-            Piece = piece;
             IsCPU = isCPU;
+            Nickname = IsCPU ? "CPU" : nickname;
+            Piece = piece;
             CountWins = 0;
         }
 

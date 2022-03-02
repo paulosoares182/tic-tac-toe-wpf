@@ -17,5 +17,10 @@ namespace TicTacToe
             DataContext = new MainWindowViewModel();
             Main.Content = new HomeView();
         }
+
+        private void OnDragMoveWindow(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

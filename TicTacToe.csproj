@@ -27,12 +27,6 @@
     <None Update="Assets\select_1.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\select_2.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\select_3.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Assets\wins.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

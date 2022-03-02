@@ -15,7 +15,7 @@
                 <ListBoxItem IsEnabled="False">1. Selecione com quem você deseja jogar (CPU ou outro jogador local)</ListBoxItem>
                 <ListBoxItem IsEnabled="False">2. Escolha a figura que deseja utilizar no jogo (X ou O)</ListBoxItem>
                 <ListBoxItem IsEnabled="False">3. Selecione a dificuldade se for jogar contra a CPU (Fácil, Normal, Difícil)</ListBoxItem>
-                <ListBoxItem>4. Vence o jogo quem conseguir marcar três figuras na horizontal, vertical ou diagonal.</ListBoxItem>
+                <ListBoxItem IsEnabled="False">4. Vence o jogo quem conseguir marcar três figuras na horizontal, vertical ou diagonal.</ListBoxItem>
             </ListBox>
             <Button Command="{Binding GotItCommand}" Margin="0,20,0,0">Entendi!</Button>
         </StackPanel>

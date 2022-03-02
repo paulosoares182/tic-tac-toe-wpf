@@ -1,16 +1,7 @@
-﻿using MaterialDesignColors;
-using MaterialDesignColors.ColorManipulation;
-
-using MaterialDesignThemes.Wpf;
-
+﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace TicTacToe.Helpers
 {
@@ -29,7 +20,12 @@ namespace TicTacToe.Helpers
 
         public static void FocusContent()
         {
-            app.Main.Dispatcher.Invoke(new Action(() => app.Main.Focus()));
+            //app.Main.Dispatcher.Invoke(new Action(() => app.Main.Focus()));
+
+            Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Send, new Action(() =>
+            {
+                app.Main.Focus();
+            }));
         }
 
         public static void Minimize()

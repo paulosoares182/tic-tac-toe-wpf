@@ -7,8 +7,7 @@
              xmlns:local="clr-namespace:TicTacToe.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-
+    <Grid Focusable="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -22,16 +21,18 @@
         </Grid.RowDefinitions>
 
         <!--Row 0 | ColSpan 2 | TOP -->
-        <DockPanel Grid.ColumnSpan="2" Grid.Row="0">
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="0" LastChildFill="False">
             <Label FontWeight="SemiBold">Partidas Disputadas:</Label>
-            <Label Content="{Binding Path=Bll.Game.CountMatches, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            <Label Content="{Binding Path=Controller.Game.CountMatches, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    Foreground="{DynamicResource PrimaryHueMidBrush}"/>
             <Label FontWeight="SemiBold">Empates:</Label>
-            <Label Content="{Binding Path=Bll.Game.CountDraw, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            <Label Content="{Binding Path=Controller.Game.CountDraw, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    Foreground="{DynamicResource PrimaryHueMidBrush}"/>
             <Label FontWeight="SemiBold">Vez de:</Label>
-            <Label Content="{Binding Path=Bll.CurrentPlayer.Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+            <Label Content="{Binding Path=Controller.CurrentPlayer.Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                    Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+
+            <Button DockPanel.Dock="Right" Width="100" Margin="0,0,20,0" Command="{Binding StopCommand}">Parar</Button>
         </DockPanel>
         
         <!-- Row 1 | Col 1 | BOARD -->
@@ -82,22 +83,22 @@
 
         <!-- Row 1 | Col 0 | PLAYER 1 -->
         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
-            <Label Content="{Binding Path=Bll.Game.Players[0].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+            <Label Content="{Binding Path=Controller.Game.Players[0].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                    Foreground="{DynamicResource PrimaryHueMidBrush}"
                    FontSize="20"
                    HorizontalAlignment="Center"></Label>
-            <Label Content="{Binding Path=Bll.Game.Players[0].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            <Label Content="{Binding Path=Controller.Game.Players[0].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    FontSize="50"
                    HorizontalAlignment="Center"></Label>
         </StackPanel>
 
         <!-- Row 1 | Col 2 | PLAYER 2 -->
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
-            <Label Content="{Binding Path=Bll.Game.Players[1].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            <Label Content="{Binding Path=Controller.Game.Players[1].Nickname, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    Foreground="{DynamicResource PrimaryHueMidBrush}"
                    FontSize="20"
                    HorizontalAlignment="Center"></Label>
-            <Label Content="{Binding Path=Bll.Game.Players[1].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+            <Label Content="{Binding Path=Controller.Game.Players[1].CountWins, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                    FontSize="50"
                    HorizontalAlignment="Center"></Label>
         </StackPanel>
